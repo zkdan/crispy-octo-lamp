@@ -1,9 +1,9 @@
 // netlify/functions/openaiFunction.js
 import axios from 'axios';
 
-import type { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
+import type { Handler, HandlerEvent } from "@netlify/functions";
 
-const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
+const handler: Handler = async (event: HandlerEvent) => {
   // your server-side functionality
   const x = event.queryStringParameters;
   const body = event.body;
@@ -29,6 +29,8 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
     return {
       statusCode: 200,
       body: JSON.stringify(response.data),
+      info:x,
+      info2: body
     };
   } catch (error) {
     return {

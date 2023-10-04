@@ -14,6 +14,7 @@ function App() {
       })
       .catch(error => {
         // Handle errors
+        console.log(error)
       });
 
   },[])
