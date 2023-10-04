@@ -1,7 +1,12 @@
 // netlify/functions/openaiFunction.js
 import axios from 'axios';
 
-exports.handler = async function (event, context) {
+import type { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
+
+const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
+  // your server-side functionality
+  const x = event.queryStringParameters;
+  const body = event.body;
   try {
     // Your OpenAI API key
     const apiKey = process.env.OPENAI_API_KEY;
@@ -32,3 +37,5 @@ exports.handler = async function (event, context) {
     };
   }
 };
+
+export { handler };
