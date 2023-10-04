@@ -7,7 +7,7 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
   useEffect(()=>{
-    axios.get('https://pokeapi.co/api/v2/pokemon-form/charizard')
+    axios.get('https://quiet-douhua-b0fd6b.netlify.app/.netlify/functions/openai-function')
     .then(response => {
         // Handle the response from your backend
         console.log(response.data)
