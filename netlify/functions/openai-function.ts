@@ -8,7 +8,7 @@ const handler: Handler = async () => {
   // const body = event.body;
   try {
     // Your OpenAI API key
-    // const apiKey = process.env.OPENAI_API_KEY;
+    const apiKey = process.env.OPENAI_API_KEY;
 
     // // Define your OpenAI API request
     // const response = await axios.post(
@@ -27,7 +27,7 @@ const handler: Handler = async () => {
 
     return {
       statusCode: 200,
-      body: 'gotcha'
+      body: apiKey
     };
   } catch (error) {
     return {
