@@ -11,7 +11,7 @@ const handler: Handler = async (event: HandlerEvent) => {
       model: 'gpt-3.5-turbo',
       messages: [
         { role: 'system', content: 'You are a helpful assistant.' },
-        { role: 'user', content: query },
+        { role: 'user', content: 'what are the numbers between 3 and 10?' },
       ],
       max_tokens:30
     };
@@ -25,10 +25,10 @@ const handler: Handler = async (event: HandlerEvent) => {
       },
     })
     .then(response => {
-      return response.data.choices[0].message.content
+      return `${response.data.choices[0].message.content} ${query}`
     })
     .catch(error => {
-       return JSON.stringify({ error: `This issue: ${error}` })
+       return JSON.stringify({ error: `This issue: ${error} ${query}` })
     });
     return {
       statusCode:200,
