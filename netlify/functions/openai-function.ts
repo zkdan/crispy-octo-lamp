@@ -1,16 +1,28 @@
 // netlify/functions/openaiFunction.js
 import axios from 'axios';
 import type { Handler } from "@netlify/functions";
+import OpenAI from "openai";
+const openai = new OpenAI();
+async function main() {
+  const completion = await openai.chat.completions.create({
+    messages: [{ role: "system", content: "You are a helpful assistant." }],
+    model: "gpt-3.5-turbo",
+  });
+  console.log('main')
+  console.log(completion.choices[0]);
+}
+
 
 const handler: Handler = async () => {
+
   // your server-side functionality
   // const x = event.queryStringParameters;
   // const body = event.body;
   try {
     // Your OpenAI API key
     const apiKey = process.env.OPENAI_API_KEY;
-
-    // // Define your OpenAI API request
+    main();
+    // Define your OpenAI API request
     const response = await axios.post(
       'https://api.openai.com/v1/engines/gpt-3.5-turbo/completions',
       {
