@@ -1,4 +1,4 @@
-import { ChangeEvent, EventHandler, useState } from 'react'
+import {useState } from 'react'
 import './App.css'
 import axios from 'axios';
 import Loader from './Loader';
@@ -15,10 +15,10 @@ function App() {
   })
     
   }
-  const handleChange =(e)=>{
+  const handleChange : React.ChangeEventHandler<HTMLInputElement>=(e)=>{
     setQuestion(e.target.value);
   }
-  const handleSubmit=(e)=>{
+  const handleSubmit: React.ChangeEventHandler<HTMLFormElement>=(e)=>{
     e.preventDefault();
     setQuestion('');
   }
