@@ -4,8 +4,6 @@ import type { Handler } from "@netlify/functions";
 const handler: Handler = async () => {
 
   // your server-side functionality
-  // const x = event.queryStringParameters;
-  // const body = event.body;
   try {
     // Your OpenAI API key
     const apiKey = process.env.OPENAI_API_KEY;
