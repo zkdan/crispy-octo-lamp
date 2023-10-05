@@ -1,7 +1,7 @@
 // netlify/functions/openaiFunction.js
 import axios from 'axios';
-import type { Handler } from "@netlify/functions";
-const handler: Handler = async () => {
+import type { Handler, HandlerEvent } from "@netlify/functions";
+const handler: Handler = async (event: HandlerEvent) => {
 
   // your server-side functionality
   try {
@@ -32,7 +32,8 @@ const handler: Handler = async () => {
     });
     return {
       statusCode:200,
-      body:res
+      body:res,
+      eventData: event
     }
   } catch (error) {
     return {
