@@ -2,7 +2,7 @@
 import axios from 'axios';
 import type { Handler, HandlerEvent } from "@netlify/functions";
 const handler: Handler = async (event: HandlerEvent) => {
-  const query = event.queryStringParameters?.config?.params.question || 'what are the numbers between 3 and 7';
+  const query = event.queryStringParameters?.question || 'what are the numbers between 3 and 7';
   try {
     // Your OpenAI API key
     const apiKey = process.env.OPENAI_API_KEY;
@@ -10,7 +10,7 @@ const handler: Handler = async (event: HandlerEvent) => {
       model: 'gpt-3.5-turbo',
       messages: [
         { role: 'system', content: 'You are a helpful assistant.' },
-        { role: 'user', content: query },
+        { role: 'user', content: `repeat back ${query}` },
       ],
       max_tokens:30
     };
