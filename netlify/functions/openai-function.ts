@@ -10,7 +10,7 @@ const handler: Handler = async (event: HandlerEvent) => {
       model: 'gpt-3.5-turbo',
       messages: [
         { role: 'system', content: 'You are a helpful assistant.' },
-        { role: 'user', content: `repeat back ${query}` },
+        { role: 'user', content: query },
       ],
       max_tokens:30
     };
