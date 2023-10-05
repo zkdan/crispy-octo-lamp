@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react'
 import './App.css'
 
@@ -14,6 +13,7 @@ function App() {
 
   return (
     <>
+    <h1>Wow this is fun</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
