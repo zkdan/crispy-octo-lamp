@@ -2,7 +2,7 @@
 import axios from 'axios';
 import type { Handler, HandlerEvent } from "@netlify/functions";
 const handler: Handler = async (event: HandlerEvent) => {
-
+  const query = event.queryStringParameters;
   // your server-side functionality
   try {
     // Your OpenAI API key
@@ -11,7 +11,7 @@ const handler: Handler = async (event: HandlerEvent) => {
       model: 'gpt-3.5-turbo',
       messages: [
         { role: 'system', content: 'You are a helpful assistant.' },
-        { role: 'user', content: 'what are the numbers between 6 and 10?' },
+        { role: 'user', content: query },
       ],
       max_tokens:30
     };
@@ -32,8 +32,7 @@ const handler: Handler = async (event: HandlerEvent) => {
     });
     return {
       statusCode:200,
-      body:res,
-      eventData: event
+      body:res
     }
   } catch (error) {
     return {
