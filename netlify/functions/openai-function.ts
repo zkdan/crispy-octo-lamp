@@ -2,7 +2,8 @@
 import axios from 'axios';
 import type { Handler } from "@netlify/functions";
 const handler: Handler = async () => {
-
+  let x = {statusCode:0,
+  response:'general'};
   // your server-side functionality
   try {
     // Your OpenAI API key
@@ -26,18 +27,18 @@ const handler: Handler = async () => {
     })
     // .then(response => response.json())
     .then(data => {
-      return {
+      x= {
         statusCode: 200,
-        body: data.data.choices[0].message.content 
+        response: data.data.choices[0].message.content 
       };
     })
     .catch(error => {
-      return {
+      x= {
         statusCode:200,
-        body: console.error(error)
+        response: JSON.stringify(console.error(error))
       }
     });
- 
+    return x
   } catch (error) {
     return {
       statusCode: 500,
