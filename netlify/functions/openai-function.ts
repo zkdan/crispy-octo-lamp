@@ -1,6 +1,6 @@
 // netlify/functions/openaiFunction.js
 import axios from 'axios';
-import type { Handler, HandlerEvent } from "@netlify/functions";
+import type { Handler } from "@netlify/functions";
 
 const handler: Handler = async () => {
   // your server-side functionality
