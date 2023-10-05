@@ -24,7 +24,6 @@ const handler: Handler = async () => {
         'Content-Type': 'application/json',
       },
     })
-    // .then(response => response.json())
     .then(response => {
       return response.data.choices[0].message.content
     })
@@ -33,7 +32,7 @@ const handler: Handler = async () => {
     });
     return {
       statusCode:200,
-      body:JSON.stringify(res)
+      body:res
     }
   } catch (error) {
     return {
