@@ -1,5 +1,5 @@
 // netlify/functions/openaiFunction.js
-// import axios from 'axios';
+import axios from 'axios';
 import type { Handler } from "@netlify/functions";
 const handler: Handler = async () => {
 
@@ -15,27 +15,29 @@ const handler: Handler = async () => {
       ],
       max_tokens:30
     };
-    // Define your OpenAI API request
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    axios({
       method: 'POST',
-      body: JSON.stringify(requestData),
+      url:'https://api.openai.com/v1/chat/completions',
+      data: JSON.stringify(requestData),
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
     })
-    .then(response => response.json())
+    // .then(response => response.json())
     .then(data => {
-      return data.choices[0].message.content;
+      return {
+        statusCode: 200,
+        body: data.data.choices[0].message.content 
+      };
     })
     .catch(error => {
-      return console.error(error);
+      return {
+        statusCode:200,
+        body: console.error(error)
+      }
     });
-
-    return {
-      statusCode: 200,
-      body: response 
-    };
+ 
   } catch (error) {
     return {
       statusCode: 500,
