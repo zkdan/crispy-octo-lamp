@@ -1,18 +1,6 @@
 // netlify/functions/openaiFunction.js
-import axios from 'axios';
+// import axios from 'axios';
 import type { Handler } from "@netlify/functions";
-import OpenAI from "openai";
-const openai = new OpenAI();
-async function main() {
-  const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: "You are a helpful assistant." }],
-    model: "gpt-3.5-turbo",
-  });
-  console.log('main')
-  console.log(completion.choices[0]);
-}
-
-
 const handler: Handler = async () => {
 
   // your server-side functionality
@@ -21,25 +9,34 @@ const handler: Handler = async () => {
   try {
     // Your OpenAI API key
     const apiKey = process.env.OPENAI_API_KEY;
-    main();
+    const requestData = {
+      model: 'gpt-3.5-turbo',
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'user', content: 'what are the numbers between 6 and 10?' },
+      ],
+      max_tokens:30
+    };
     // Define your OpenAI API request
-    const response = await axios.post(
-      'https://api.openai.com/v1/engines/gpt-3.5-turbo/completions',
-      {
-        prompt: 'Translate the following English text to French: "Hello, world!"',
-        max_tokens: 50,
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      body: JSON.stringify(requestData),
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
       },
-      {
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    })
+    .then(response => response.json())
+    .then(data => {
+      return data.choices[0].message.content;
+    })
+    .catch(error => {
+      return console.error(error);
+    });
 
     return {
       statusCode: 200,
-      body: response.data
+      body: response 
     };
   } catch (error) {
     return {
