@@ -16,7 +16,7 @@ const handler: Handler = async () => {
       ],
       max_tokens:30
     };
-    axios({
+    await axios({
       method: 'POST',
       url:'https://api.openai.com/v1/chat/completions',
       data: JSON.stringify(requestData),
