@@ -3,9 +3,14 @@ import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import OpenAI from "openai";
+const openai = new OpenAI();
 
 function App() {
   const [count, setCount] = useState(0)
+
+
+
   useEffect(()=>{
     axios.get('https://quiet-douhua-b0fd6b.netlify.app/.netlify/functions/openai-function')
     .then(response => {

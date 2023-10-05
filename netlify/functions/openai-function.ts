@@ -11,23 +11,23 @@ const handler: Handler = async () => {
     const apiKey = process.env.OPENAI_API_KEY;
 
     // // Define your OpenAI API request
-    // const response = await axios.post(
-    //   'https://api.openai.com/v1/engines/gpt-3.5-turbo/completions',
-    //   {
-    //     prompt: 'Translate the following English text to French: "Hello, world!"',
-    //     max_tokens: 50,
-    //   },
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${apiKey}`,
-    //       'Content-Type': 'application/json',
-    //     },
-    //   }
-    // );
+    const response = await axios.post(
+      'https://api.openai.com/v1/engines/gpt-3.5-turbo/completions',
+      {
+        prompt: 'Translate the following English text to French: "Hello, world!"',
+        max_tokens: 50,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
     return {
       statusCode: 200,
-      body: apiKey
+      body: response.data
     };
   } catch (error) {
     return {
