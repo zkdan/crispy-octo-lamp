@@ -16,7 +16,7 @@ const handler: Handler = async () => {
       ],
       max_tokens:30
     };
-    await axios({
+     axios({
       method: 'POST',
       url:'https://api.openai.com/v1/chat/completions',
       data: JSON.stringify(requestData),
@@ -29,7 +29,7 @@ const handler: Handler = async () => {
     .then(data => {
       x= {
         statusCode: 200,
-        response: data.data.choices[0].message.content 
+        response: JSON.stringify(data.data) 
       };
     })
     .catch(error => {
