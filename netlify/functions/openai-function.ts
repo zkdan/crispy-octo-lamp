@@ -12,7 +12,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         { role: 'system', content: 'You are a helpful assistant.' },
         { role: 'user', content: query },
       ],
-      max_tokens:30
+      max_tokens:80
     };
     const res = await axios({
       method: 'POST',

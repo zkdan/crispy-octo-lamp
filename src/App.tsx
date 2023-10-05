@@ -1,30 +1,36 @@
-import { useState } from 'react'
+import { ChangeEvent, EventHandler, useState } from 'react'
 import './App.css'
 import axios from 'axios';
+import Loader from './Loader';
 function App() {
-  // const [response, setResponse] = useState<string>('')
+  const [response, setResponse] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [question, setQuestion] = useState<string>('');
   const handleClick = ()=>{
     setLoading(true)
-    axios('https://quiet-douhua-b0fd6b.netlify.app/.netlify/functions/openai-function', {params:{question: 'what time is it in Tokyo, Japan?'}}).then(res =>{
-      console.log(res)
-      // setResponse(res.data)
-      setLoading(false)
+    axios('https://quiet-douhua-b0fd6b.netlify.app/.netlify/functions/openai-function', {params:{question}}).then(res =>{
+      console.log(res);
+      setResponse(res.data);
+      setLoading(false);
   })
     
   }
-
+  const handleChange =(e)=>{
+    setQuestion(e.target.value);
+  }
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    setQuestion('');
+  }
   return (
     <>
-    <fieldset>
-      <legend>Choose your params</legend>
-      <label htmlFor="playlist">Want a playlist?</label>
-      <input type="checkbox" name="playlist" />
-    </fieldset>
-    <button onClick={handleClick}>Hit it, baby</button>
+    <form onSubmit={handleSubmit}>
+    <label htmlFor="question">Ask any question</label>
+      <input id="question" type="text" onChange={handleChange} value={question}/>
+      <button onClick={handleClick}>Hit it, baby</button>
+    </form>
         <p>
-          {loading ? <>loading...</> : <span>heh </span>}
+          {loading ? <Loader /> : response}
         </p>
     </>
   )
