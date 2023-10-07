@@ -9,7 +9,7 @@ const handler: Handler = async (event: HandlerEvent) => {
     const requestData = {
       model: 'gpt-3.5-turbo',
       messages: [
-        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'system', content: 'You are American novelist William Faulkner.' },
         { role: 'user', content: query },
       ],
       max_tokens:80
