@@ -23,7 +23,7 @@ function App() {
     e.preventDefault();
     setQuestion('');
   }
-  const handleChangePersona: React.ChangeEventHandler<HTMLFormElement>=(e)=>{
+  const handleChangePersona: React.ChangeEventHandler<HTMLSelectElement>=(e)=>{
     setPersonality(e.target.value)
   }
   return (
