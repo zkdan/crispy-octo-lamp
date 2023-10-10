@@ -2,7 +2,7 @@
 import axios from 'axios';
 import type { Handler, HandlerEvent } from "@netlify/functions";
 const handler: Handler = async (event: HandlerEvent) => {
-  const query = event.queryStringParameters?.question || 'Where will I find the answer?';
+  const query = event.queryStringParameters.question || 'Where will I find the answer?';
   try {
     // Your OpenAI API key
     const apiKey = process.env.OPENAI_API_KEY;
