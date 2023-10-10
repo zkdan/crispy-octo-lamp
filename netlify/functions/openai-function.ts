@@ -9,7 +9,7 @@ const handler: Handler = async (event: HandlerEvent) => {
     const requestData = {
       model: 'gpt-3.5-turbo',
       messages: [
-        { role: 'system', content: `You are Chinese poet and philospher Lao Tzu.` },
+        { role: 'system', content: 'You are Chinese poet and philospher Lao Tzu.' },
         { role: 'user', content: query },
       ],
       max_tokens:80
@@ -31,8 +31,7 @@ const handler: Handler = async (event: HandlerEvent) => {
     });
     return {
       statusCode:200,
-      body:res
-    }
+      body: JSON.stringify(res.data.choices[0].message.content)}
   } catch (error) {
     return {
       statusCode: 500,
