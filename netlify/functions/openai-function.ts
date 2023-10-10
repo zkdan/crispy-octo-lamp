@@ -12,7 +12,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         { role: 'system', content: 'You are Chinese poet and philospher Lao Tzu.' },
         { role: 'user', content: query },
       ],
-      max_tokens:80
+      max_tokens:40
     };
     const res = await axios({
       method: 'POST',
